@@ -7,48 +7,16 @@ float mul(float, float);
 float div(float, float);
 
 int main() {
-    float num1, num2;
-    int choice;
+    float num1 = 10.0, num2 = 5.0;
 
-    while (1) {
-        printf("\n--- Simple Calculator ---\n");
-        printf("1. Add\n");
-        printf("2. Subtract\n");
-        printf("3. Multiply\n");
-        printf("4. Divide\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+    printf("\n--- Simple Calculator Automation ---\n");
+    printf("Numbers: %.2f and %.2f\n", num1, num2);
 
-        if (choice == 5) {
-            printf("Exiting...\n");
-            break;
-        }
+    printf("Addition: %.2f\n", add(num1, num2));
+    printf("Subtraction: %.2f\n", sub(num1, num2));
+    printf("Multiplication: %.2f\n", mul(num1, num2));
+    printf("Division: %.2f\n", div(num1, num2));
 
-        printf("Enter first number: ");
-        scanf("%f", &num1);
-        printf("Enter second number: ");
-        scanf("%f", &num2);
-
-        switch (choice) {
-            case 1:
-                printf("Result: %.2f\n", add(num1, num2));
-                break;
-            case 2:
-                printf("Result: %.2f\n", sub(num1, num2));
-                break;
-            case 3:
-                printf("Result: %.2f\n", mul(num1, num2));
-                break;
-            case 4:
-                printf("Result: %.2f\n", div(num1, num2));
-                break;
-            default:
-                printf("Invalid choice!\n");
-        }
-    }
-
+    printf("✅ Build completed successfully.\n");
     return 0;
 }
-
-
