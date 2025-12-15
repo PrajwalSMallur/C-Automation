@@ -24,4 +24,4 @@ jobs:
         env:
           MESSAGE: ${{ secrets.PRACTICE_MESSAGE }}
         run: |
-          echo "Message from secret: $new message"
+          echo "Message from secret: $MESSAGE"
