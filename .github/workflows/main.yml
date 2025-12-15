@@ -1,21 +1,20 @@
-name: C Calculator Build and Run
+name: Example Workflow using Secrets
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Install GCC
-      run: sudo apt update && sudo apt install -y build-essential
-
-    - name: generate ./exe
-      run: make
+      - name: Use Secret in Step
+        env:
+          EXTERNAL_SERVICE_USER: ${{ secrets.DEV_USERNAME }}
+          EXTERNAL_SERVICE_PASS: ${{ secrets.DEV_PASSWORD }}
+        run: |
+          echo "Connecting with user: $EXTERNAL_SERVICE_USER"
+          ./run-ct-framework \
+            --user $EXTERNAL_SERVICE_USER \
+            --pass $EXTERNAL_SERVICE_PASS
