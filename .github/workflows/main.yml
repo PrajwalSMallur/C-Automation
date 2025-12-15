@@ -1,20 +1,27 @@
-name: Example Workflow using Secrets
+name: C Calculator Build and Run
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Secret in Step
+      - name: Install GCC
+        run: sudo apt update && sudo apt install -y build-essential
+
+      - name: Generate executable
+        run: make
+
+      - name: Use GitHub Secret (Practice)
         env:
-          EXTERNAL_SERVICE_USER: ${{ secrets.DEV_USERNAME }}
-          EXTERNAL_SERVICE_PASS: ${{ secrets.DEV_PASSWORD }}
+          MESSAGE: ${{ secrets.PRACTICE_MESSAGE }}
         run: |
-          echo "Connecting with user: $EXTERNAL_SERVICE_USER"
-          ./run-ct-framework \
-            --user $EXTERNAL_SERVICE_USER \
-            --pass $EXTERNAL_SERVICE_PASS
+          echo "Message from secret: $MESSAGE"
